@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+  .container
+    //if survey.id
+      //h1.page-header 설문 수정
+    //else
+      h1.page-header 설문 작성
+
+
+    form(action='/posts', method='POST')
+      .form-group
+        label(for='email') 작성자
+        input.form-control(name='email', placeholder='Write your name.')
+      .form-group
+        label(for='title') 제목
+        input.form-control(name='title', placeholder='Write the title.')
+      |　
+      .form-group
+        label(for='question') 질문
+        input.form-control(name='question', placeholder='Write the question.')
+        label(for='example1') 보기1
+        input.form-control(name='example1', placeholder='Write the example1.')
+        label(for='example2') 보기2
+        input.form-control(name='example2', placeholder='Write the example2.')
+        label(for='example3') 보기3
+        input.form-control(name='example3', placeholder='Write the example3.')
+        label(for='example4') 보기4
+        input.form-control(name='example4', placeholder='Write the example4.')
+      |　
+
+      div.form-action
+        a.btn.btn-default(href='javascript:window.history.back();') 뒤로
+        | &nbsp;
+        button.btn.btn-primary(type='submit') 완료

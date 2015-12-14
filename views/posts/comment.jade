@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  .container  // if문 사용하여 수정문 만들 예정...
+    h1.page-header 내용
+
+    ul
+      li 작성자 : #{comment.email}
+      li 답변 : #{comment.answer}
+      li 의견작성 : #{comment.content}
+    hr
+    p
+    a.btn.btn-xs.btn-default(data-id=comment.id, class='delete') 삭제
+
+    form#deleteForm(style='display:none', method="POST")
+
+    script(type='text/javascript').
+      $(".delete").click(function(e) {
+        var id = $(e.currentTarget).data('id');
+        if (confirm('정말 삭제하시겠습니까?')) {
+          $("#deleteForm").attr('action', "/posts/" + "comments/" + id + "?_method=DELETE").submit();
+        }
+        return false;
+      });

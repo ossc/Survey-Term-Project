@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+  .container
+    h1 설문 조사
+
+    table.table
+      tr
+        th 작성자
+        th 설문 제목
+        th 응답
+        th 작성일자
+        th
+      each post in posts
+        tr
+          td= post.email
+          td
+            a(href='/posts/#{post.id}')= post.title
+          td= post.numComment
+          td= moment(post.createdAt).format('YYYY/MM/DD')
+          td
+            a.btn.btn-xs.btn-default(data-id=post.id, class='delete') 삭제
+
+    a.btn.btn-primary(href='/posts/new') 설문 작성
+
+    form#deleteForm(style='display:none', method="POST")
+
+    script(type='text/javascript').
+      $(".delete").click(function(e) {
+        var id = $(e.currentTarget).data('id');
+        if (confirm('정말 삭제하시겠습니까?')) {
+          $("#deleteForm").attr('action', "/posts/" + id + "?_method=DELETE").submit();
+        }
+        return false;
+      });
